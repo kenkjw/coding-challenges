@@ -25,12 +25,13 @@ class Solution(object):
         :rtype: str
         """
         result = []
+        s = list(s)
         if numRows < 3:
             period = numRows
         else:
             period = 2 * numRows - 2
         for i in xrange(numRows):
-            if i==0 or i==numRows-1:
+            if i == 0 or i == numRows-1:
                 result.append(s[i::period])
             else:
                 s1 = s[i::period]
@@ -38,5 +39,5 @@ class Solution(object):
                 s3 = [None]*(len(s1)+len(s2))
                 s3[::2] = s1
                 s3[1::2] = s2
-                result.append(''.join(s3))
-        return ''.join(result)
+                result.append(s3)
+        return ''.join([''.join(s) for s in result])
