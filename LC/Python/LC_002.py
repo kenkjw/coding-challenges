@@ -24,8 +24,8 @@ class Solution(object):
         :rtype: ListNode
         """
         sum = l1.val + l2.val
-        l3 = ListNode(sum % 10)
-        carry = sum//10
+        l3 = ListNode(sum if sum < 10 else sum-10)
+        carry = 0 if sum < 10 else 1
         p = l1
         q = l2
         r = l3
@@ -34,8 +34,8 @@ class Solution(object):
             pval = p.next.val if p.next else 0
             qval = q.next.val if q.next else 0
             sum = pval + qval + carry
-            r.next = ListNode(sum % 10)
-            carry = sum // 10
+            r.next = ListNode(sum if sum < 10 else sum-10)
+            carry = 0 if sum < 10 else 1
 
             p = p.next or p
             q = q.next or q
