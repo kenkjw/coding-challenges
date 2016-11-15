@@ -16,28 +16,32 @@ class Solution(object):
         max_len = 1
         len_s = len(s)
         for i in xrange(len_s):
+            temp_len1 = max_len-1
+            temp_len2 = max_len
             while True:
-                new_len = max_len+1
+                new_len = temp_len1+2
                 min_range = i - (new_len>>1)
                 max_range = i + (new_len>>1) + (new_len&1)
                 if min_range < 0 or max_range > len_s:
                     break
                 str = s[min_range:max_range]
                 if str == str[::-1]:
-                    longest = str
-                    max_len = len(str)
+                    longest = str if len(str) > len(longest) else longest
+                    max_len = len(longest)
+                    temp_len1 = new_len
                 else:
                     break
             while True:
-                new_len = max_len+2
+                new_len = temp_len2+2
                 min_range = i - (new_len>>1)
                 max_range = i + (new_len>>1) + (new_len&1)
                 if min_range < 0 or max_range > len_s:
                     break
                 str = s[min_range:max_range]
                 if str == str[::-1]:
-                    longest = str
-                    max_len = len(str)
+                    longest = str if len(str) > len(longest) else longest
+                    max_len = len(longest)
+                    temp_len2 = new_len
                 else:
                     break
 
